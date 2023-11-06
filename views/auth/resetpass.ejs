@@ -1,0 +1,105 @@
+<%- include("../partials/header.ejs") %>
+
+<body class="bg-gradient-primary">
+  <div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-2">Mot de passe oublié ?</h1>
+                    <p class="mb-4">
+                      Entrez votre adresse e-mail ci-dessous pour réinitialiser
+                      votre mot de passe.
+                    </p>
+                  </div>
+                  <form
+                    class="user needs-validation"
+                    action="/reset"
+                    method="post"
+                    novalidate
+                  >
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        class="form-control form-control-user"
+                        id="exampleInputEmail"
+                        name="email"
+                        aria-describedby="emailHelp"
+                        placeholder="Entrez votre adresse e-mail..."
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Veuillez entrer une adresse e-mail valide.
+                      </div>
+                    </div>
+
+                    <% if (pop) {%>
+                    <div
+                      class="alert alert-warning alert-dismissible fade show p-3"
+                      role="alert"
+                    >
+                      <strong> <%= pop %></strong> n'est pas disponible.
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <%} %>
+
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-user btn-block"
+                    >
+                      Réinitialiser le mot de passe
+                    </button>
+                  </form>
+                  <hr />
+                  <div class="text-center">
+                    <a class="small" href="/register">Créer un compte !</a>
+                  </div>
+                  <div class="text-center">
+                    <a class="small" href="/login"
+                      >Vous avez déjà un compte ? Connectez-vous !</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  // Bootstrap validation script
+  (function () {
+    "use strict";
+    var forms = document.querySelectorAll(".needs-validation");
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+
+<%- include("../partials/footer.ejs") %>

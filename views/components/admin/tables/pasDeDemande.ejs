@@ -1,0 +1,86 @@
+<div class="card-body border-left-secondary">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- todo -->
+        <% pasDedemande.forEach((stager, i) => {%>
+        <tr>
+          <td><%= stager.nom %></td>
+          <td><%= stager.prenom %></td>
+          <td><%= stager.email %></td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modal<%=i%>"
+            >
+              <i class="far fa-eye"></i>
+            </button>
+            <a class="btn btn-secondary">
+              <i class="fa-regular fa-comment-dots"></i>
+            </a>
+          </td>
+        </tr>
+
+        <!-- !View Modal -->
+        <div
+          class="modal fade"
+          id="modal<%=i%>"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Information de l'utilisateur
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- * -->
+                <div class="container">
+                  <div class="row py-1 px-3">
+                    <div class="col-md-6"><strong>Nom:</strong></div>
+                    <div class="col-md-6"><%= stager.nom %></div>
+                  </div>
+                  <div class="row py-1 px-3">
+                    <div class="col-md-6"><strong>Prenom:</strong></div>
+                    <div class="col-md-6"><%=stager.prenom%></div>
+                  </div>
+                </div>
+                <!-- * -->
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary mr-auto"
+                  data-bs-dismiss="modal"
+                >
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <%}); %>
+      </tbody>
+    </table>
+  </div>
+</div>

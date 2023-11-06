@@ -1,0 +1,167 @@
+<div class="card shadow mb-4 border-left-danger"">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prenom</th>
+              <th scope="col">Email</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- todo -->
+            <% stagers.forEach((stager, i) => {%>
+            <tr>
+              <td><%= stager.nom %></td>
+              <td><%= stager.prenom %></td>
+              <td><%= stager.email %></td>
+              <!-- ? -->
+              <!--  -->
+              <% const status = (stager.demande && stager.demande.length > 0) ? stager.demande[stager.demande.length - 1].status : '' %>
+              <% if (status === "En attente") { %>
+              <!-- * -->
+              <td class="text-warning">En attente</td>
+              <!-- * -->
+              <% } else if (status === 'Accepté') { %>
+              <!-- * -->
+              <td class="text-success">Accepté</td>
+              <!-- * -->
+              <% } else if (status === 'Diminué') { %>
+              <td class="text-danger">Diminué</td>
+              <% } else { %>
+              <td>Pas de demande</td>
+              <% } %>
+              <!-- ? -->
+              <td>
+                <a class="btn btn-danger" href="/admin/remove/<%=stager._id%>">
+                    <i class="fa-solid fa-user-slash"></i>                </a>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal<%=i%>"
+                >
+                  <i class="far fa-eye"></i>
+                </button>
+                <a class="btn btn-secondary">
+                  <i class="fa-regular fa-comment-dots"></i>
+                </a>
+              </td>
+            </tr>
+  
+            <!-- !View Modal -->
+            <% if(stager.demande.length > 0){ %>
+            <div
+              class="modal fade"
+              id="modal<%=i%>"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Information de l'utilisateur
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- * -->
+                    <div class="container">
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Nom:</strong></div>
+                        <div class="col-md-6"><%= stager.nom %></div>
+                      </div>
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Prenom:</strong></div>
+                        <div class="col-md-6"><%=stager.prenom%></div>
+                      </div>
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Domain:</strong></div>
+                        <div class="col-md-6">
+                          <%=stager.demande[stager.demande.length - 1].domain%>
+                        </div>
+                      </div>
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Tel:</strong></div>
+                        <div class="col-md-6">
+                          <%=stager.demande[stager.demande.length - 1].tel%>
+                        </div>
+                      </div>
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Sexe:</strong></div>
+                        <div class="col-md-6">
+                          <%=stager.demande[stager.demande.length - 1].sexe%>
+                        </div>
+                      </div>
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Age:</strong></div>
+                        <div class="col-md-6">
+                          <% const birthdate = new
+                          Date(stager.demande[stager.demande.length -
+                          1].datenaiss); %> <% const currentDate = new Date(); %>
+                          <% const ageInMilliseconds = currentDate - birthdate; %>
+                          <% const ageInYears = Math.floor(ageInMilliseconds /
+                          (365.25 * 24 * 60 * 60 * 1000)); %> <%= ageInYears %>
+                          ans
+                        </div>
+                      </div>
+  
+                      <div class="row py-1 px-3">
+                        <div class="col-md-6"><strong>Adress:</strong></div>
+                        <div class="col-md-6">
+                          <p>
+                            <%=stager.demande[stager.demande.length - 1].adress%>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- * -->
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary mr-auto"
+                      data-bs-dismiss="modal"
+                    >
+                      Fermer
+                    </button>
+                    <a
+                      href="/admin/doc/<%=stager.demande[stager.demande.length - 1].cv%>"
+                      target="_blank"
+                      class="btn btn-primary px-4"
+                      >CV</a
+                    >
+                    <a
+                      href="/admin/doc/<%=stager.demande[stager.demande.length - 1].demandeDeStage%>"
+                      target="_blank"
+                      class="btn btn-success"
+                      >Demande De Stage</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            <!--  -->
+            <%}); %>
+          </tbody>
+        </table>
+        <% if (pop) {%>
+        <div class="alert alert-danger" role="alert">
+          L'utilisateur a été supprimée avec succès
+        </div>
+        <%} %>
+      </div>
+    </div>
+  </div>
+  

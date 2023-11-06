@@ -1,0 +1,79 @@
+<%- include('../partials/header.ejs') %>
+
+<div id="page-top">
+  <div id="wrapper">
+    <%- include('../components/client/mainnav.ejs') %>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <nav
+          class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+        >
+          <form class="form-inline">
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+          </form>
+          <%- include('../components/client/navbar.ejs') %>
+        </nav>
+        <div class="container-fluid">
+          <h1 class="h3 mb-2 text-gray-800">Mes demandes</h1>
+          <div class="card shadow mb-4">
+            <div class="card-body border-left-success">
+              <%- include('../components/client/newform.ejs') %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Fahchouch Mohammed 2023</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <div
+    class="modal fade"
+    id="logoutModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Déconnexion</h5>
+          <button
+            class="close"
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à
+          votre session en cours.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">
+            Annuler
+          </button>
+          <a class="btn btn-primary" href="/logout">Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
+</div>

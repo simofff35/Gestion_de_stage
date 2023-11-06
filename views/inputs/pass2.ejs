@@ -1,0 +1,96 @@
+<body>
+  <div class="container mt-5">
+    <form
+      class="user needs-validation"
+      action="/resetchange/<%=token%>"
+      method="post"
+      novalidate
+      id="passwordForm"
+    >
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-control-user"
+          id="InputPassword"
+          placeholder="Mot de passe"
+          pattern=".{6,}"
+          required
+        />
+        <div class="invalid-feedback">
+          Le mot de passe doit comporter au moins 6 caractères.
+        </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-control-user"
+          id="RepeatPassword"
+          placeholder="Confirmer le mot de passe"
+          pattern=".{6,}"
+          name="password"
+          required
+        />
+        <div class="invalid-feedback">
+          Les mots de passe ne correspondent pas.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-user btn-block">
+        Réinitialiser le mot de passe
+      </button>
+    </form>
+  </div>
+
+  <div class="container mt-2">
+    <div class="alert alert-danger d-none" id="alertError">
+      Une erreur s'est produite. Veuillez vérifier les informations et
+      réessayer.
+    </div>
+  </div>
+
+  <script>
+    // Bootstrap validation script
+    (function () {
+      "use strict";
+      // Fetch the register form element
+      var form = document.querySelector(".needs-validation");
+      // Fetch the password input fields
+      var inputPassword = document.getElementById("InputPassword");
+      var repeatPassword = document.getElementById("RepeatPassword");
+
+      // Add custom validation for password matching
+      form.addEventListener("submit", function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        if (inputPassword.value !== repeatPassword.value) {
+          event.preventDefault();
+          showValidationAlert("Les mots de passe ne correspondent pas.");
+        } else if (inputPassword.value.length < 6) {
+          event.preventDefault();
+          showValidationAlert(
+            "Le mot de passe doit comporter au moins 6 caractères."
+          );
+        } else {
+          form.classList.add("was-validated");
+        }
+      });
+
+      // Helper function to show validation alerts
+      function showValidationAlert(message) {
+        var alertDiv = document.createElement("div");
+        alertDiv.classList.add("alert", "alert-danger", "mt-3", "p-2");
+        alertDiv.textContent = message;
+
+        // Remove any existing validation alert
+        var existingAlert = form.querySelector(".alert-danger");
+        if (existingAlert) {
+          existingAlert.remove();
+        }
+
+        form.appendChild(alertDiv);
+      }
+    })();
+  </script>
+</body>

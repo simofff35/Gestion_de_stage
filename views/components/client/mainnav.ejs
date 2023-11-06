@@ -1,0 +1,48 @@
+<ul
+  class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+  id="accordionSidebar"
+>
+  <a
+    class="sidebar-brand d-flex align-items-center justify-content-center"
+    href="index.html"
+  >
+    <img src="/img/no.png" alt="" style="width: 50px; height: 50px" />
+    <div class="sidebar-brand-text mx-3">REGION DE L'ORIENTAL<sup></sup></div>
+  </a>
+
+  <hr class="sidebar-divider my-0 py-3" />
+
+  <li class="nav-item <%= activeTab === 'dashboard' ? 'active' : '' %>">
+    <a class="nav-link" href="/dashboard">
+      <i class="fa-solid fa-file"></i>
+      <span>Mes demmandes</span>
+    </a>
+  </li>
+
+  <li class="nav-item <%= activeTab === 'new' ? 'active' : '' %>">
+    <a class="nav-link" href="/new">
+      <i class="fa-solid fa-file-circle-plus"></i>
+      <span>Créer une demande</span>
+    </a>
+  </li>
+
+  <% if (activeTab === "modify") {%>
+  <li class="nav-item active">
+    <a class="nav-link" href="#">
+      <i class="fa-solid fa-file-pen"></i>
+      <span>Modifier ma demande</span>
+    </a>
+  </li>
+  <%} %>
+
+  <li class="nav-item <%= activeTab === 'messages' ? 'active' : '' %>">
+    <a class="nav-link" href="/messages">
+      <i class="fa-solid fa-inbox"></i>
+      <span>Boite de reception</span>
+    </a>
+  </li>
+
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+</ul>

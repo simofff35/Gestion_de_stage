@@ -1,0 +1,103 @@
+<%- include('../partials/header.ejs') %>
+
+<div id="page-top">
+  <div id="wrapper">
+    <%- include('../components/client/mainnav.ejs') %>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <nav
+          class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+        >
+          <form class="form-inline">
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+          </form>
+          <%- include('../components/client/navbar.ejs') %>
+        </nav>
+        <div class="container-fluid">
+          <h1 class="h3 text-gray-800 mb-3">Message récent</h1>
+
+          <div class="list-group">
+            <div
+              href="#"
+              class="list-group-item list-group-item-action"
+              aria-current="true"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">ADMIN:</h5>
+              </div>
+              <ul class="list-group">
+                <% if (msg.length === 0) {%>
+                <div class="fs-4 text-body-tertiary py-3">
+                  Vous avez aucun message.
+                </div>
+                <%} else{ %> <% msg.reverse().forEach(i => {%>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-start"
+                >
+                  <div>
+                    <p class="pr-2"><%=i.message%></p>
+                  </div>
+                  <% function formatDate(date) { const options = { year:
+                  "numeric", month: "2-digit", day: "2-digit", hour: "2-digit",
+                  minute: "2-digit", }; return new
+                  Date(date).toLocaleDateString("fr-FR", options); } %>
+                  <span class="align-self-start"
+                    ><%= formatDate(i.date) %></span
+                  >
+                </li>
+                <%}); %> <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Fahchouch Mohammed 2023</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <div
+    class="modal fade"
+    id="logoutModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Déconnexion</h5>
+          <button class="close" type="button" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à
+          votre session en cours.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">
+            Annuler
+          </button>
+          <a class="btn btn-primary" href="/logout">Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

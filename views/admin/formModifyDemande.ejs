@@ -1,0 +1,397 @@
+<%- include('../partials/header.ejs') %>
+
+<div id="page-top">
+  <div id="wrapper">
+    <ul
+      class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+      id="accordionSidebar"
+    >
+      <a
+        class="sidebar-brand d-flex align-items-center justify-content-center"
+        href=""
+      >
+        <img src="/img/no.png" alt="" style="width: 50px; height: 50px" />
+        <div class="sidebar-brand-text mx-3">
+          REGION DE L'ORIENTAL<sup></sup>
+        </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0" />
+
+      <!-- !Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/dashboard">
+          <i class="fa-solid fa-database"></i>
+          <span>Tous les utilisateurs</span></a
+        >
+      </li>
+
+      <hr class="sidebar-divider" />
+
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-toggle="collapse"
+          data-target="#collapsePages"
+          aria-expanded="true"
+          aria-controls="collapsePages"
+        >
+          <i class="fa-solid fa-folder"></i>
+          <span>Gestion des demandes</span>
+        </a>
+        <div
+          id="collapsePages"
+          class="collapse"
+          aria-labelledby="headingPages"
+          data-parent="#accordionSidebar"
+        >
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/admin/traiter"
+              ><i class="fa-solid fa-file-circle-check"> </i> Traiter Les
+              demandes
+            </a>
+            <a class="collapse-item" href="/admin/new"
+              ><i class="fa-solid fa-file-circle-plus"></i> Créer une demande</a
+            >
+            <a class="collapse-item active" href="/admin/modify"
+              ><i class="fa-solid fa-file-pen"></i> Modifier une demande</a
+            >
+            <a class="collapse-item text-truncate" href="/admin/delete"
+              ><i class="fa-solid fa-file-circle-minus"></i> Supprimer une
+              demande</a
+            >
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-toggle="collapse"
+          data-target="#collapseUtilities"
+          aria-expanded="true"
+          aria-controls="collapseUtilities"
+        >
+          <i class="fa-solid fa-users-gear"></i>
+          <span>Gestion des stagiaires</span>
+        </a>
+        <div
+          id="collapseUtilities"
+          class="collapse"
+          aria-labelledby="headingUtilities"
+          data-parent="#accordionSidebar"
+        >
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/admin/add">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Ajouter un stagiaire</span>
+            </a>
+            <a class="collapse-item" href="/admin/modify">
+              <i class="fa-solid fa-user-pen"></i>
+              <span>Modifier un stagiaire</span>
+            </a>
+            <a class="collapse-item" href="/admin/remove">
+              <i class="fa-solid fa-user-minus"></i>
+              <span>Supprimer un stagiaire</span>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/msg">
+          <i class="fa-solid fa-inbox"></i> <span>Boite des message</span></a
+        >
+      </li>
+
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <nav
+          class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+        >
+          <form class="form-inline">
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+          </form>
+          <%- include('../components/admin/navbar.ejs') %>
+        </nav>
+        <div class="container-fluid">
+          <!-- ?DATA TABLE -->
+          <h1 class="h3 mb-2 text-gray-800">
+            Modifier une demande
+            <strong class="text-secondary"
+              >(<%=stager.nom%> <%=stager.prenom%>)</strong
+            >
+          </h1>
+          <div class="card shadow mb-4">
+            <div class="card-body border-left-success">
+              <div class="container">
+                <form
+                  action="/admin/modify/<%=stager._id%>"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-6">
+                        <label for="nom" class="form-label">Nom:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nom"
+                          name="nom"
+                          required=""
+                        />
+                        <div class="invalid-feedback">
+                          Veuillez saisir votre nom.
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label for="prenom" class="form-label">Prénom:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="prenom"
+                          name="prenom"
+                          required=""
+                        />
+                        <div class="invalid-feedback">
+                          Veuillez saisir votre prénom.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      required=""
+                    />
+                    <div class="invalid-feedback">
+                      Veuillez saisir une adresse email valide.
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="adress" class="form-label"
+                      >Adresse complète:</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="adress"
+                      required=""
+                    />
+                    <div class="invalid-feedback">
+                      Veuillez saisir votre adresse complète.
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-6">
+                        <label for="sexe" class="form-label">Sexe:</label>
+                        <select
+                          name="sexe"
+                          id="sexe"
+                          class="form-control form-select"
+                          required=""
+                        >
+                          <option value="">Sélectionner</option>
+                          <option value="Homme">Homme</option>
+                          <option value="Femme">Femme</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Veuillez sélectionner votre sexe.
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label for="date" class="form-label"
+                          >Date de naissance:</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control form-control-user"
+                          id="date"
+                          name="datenaiss"
+                          placeholder="Date de naissance"
+                          required=""
+                        />
+                        <div class="invalid-feedback">
+                          Veuillez saisir votre date de naissance.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="mt-4" />
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-6">
+                        <label for="domaine" class="form-label"
+                          >Domaine de stage:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="domaine"
+                          name="domain"
+                          required=""
+                        />
+                        <div class="invalid-feedback">
+                          Veuillez saisir votre domaine de stage.
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label for="tel" class="form-label"
+                          >Numéro de téléphone:</label
+                        >
+                        <input
+                          type="tel"
+                          id="tel"
+                          class="form-control"
+                          name="tel"
+                          maxlength="10"
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          required=""
+                        />
+                        <div class="invalid-feedback">
+                          Veuillez saisir un numéro de téléphone valide.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="demandeDeStage" class="form-label"
+                      >Demande de Stage:</label
+                    >
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="demandeDeStage"
+                      name="demandeDeStage"
+                      accept=".pdf"
+                      required=""
+                    />
+                    <div class="invalid-feedback">
+                      Veuillez sélectionner un fichier PDF.
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cv" class="form-label">CV:</label>
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="cv"
+                      name="cv"
+                      accept=".pdf"
+                      required=""
+                    />
+                    <div class="invalid-feedback">
+                      Veuillez sélectionner un fichier PDF.
+                    </div>
+                  </div>
+
+                  <small class="form-text text-muted"
+                    >Taille maximale du fichier : 5 Mo. Seuls les fichiers PDF
+                    sont autorisés.</small
+                  >
+
+                  <div class="form-group d-flex justify-content-end mt-3">
+                    <button type="submit" class="btn btn-primary">
+                      Envoyer la demande
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <script>
+            // Bootstrap validation script
+            (function () {
+              "use strict";
+
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.querySelectorAll(".needs-validation");
+
+              // Loop over them and prevent submission
+              Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener(
+                  "submit",
+                  function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+
+                    form.classList.add("was-validated");
+                  },
+                  false
+                );
+              });
+            })();
+          </script>
+        </div>
+      </div>
+
+      <%- include('../components/copywrite.ejs') %>
+    </div>
+  </div>
+
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <div
+    class="modal fade"
+    id="logoutModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Déconnexion</h5>
+          <button
+            class="close"
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Sélectionnez "Déconnexion" ci-dessous si vous êtes prêt à mettre fin à
+          votre session en cours.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">
+            Annuler
+          </button>
+          <a class="btn btn-primary" href="/logout">Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
+</div>

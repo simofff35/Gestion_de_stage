@@ -1,0 +1,198 @@
+<h1 class="h3 mb-2 text-gray-800">
+  Créer une demande
+  <strong class="text-secondary"
+    >(<%= stager.nom %> <%= stager.prenom %>)</strong
+  >
+</h1>
+<div class="card shadow mb-4">
+  <div class="card-body border-left-success">
+    <div class="container">
+      <form
+        action="/admin/new/<%= stager._id %>"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <label for="nom" class="form-label">Nom:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nom"
+                name="nom"
+                required
+              />
+              <div class="invalid-feedback">Veuillez saisir votre nom.</div>
+            </div>
+            <div class="col-6">
+              <label for="prenom" class="form-label">Prénom:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="prenom"
+                name="prenom"
+                required
+              />
+              <div class="invalid-feedback">Veuillez saisir votre prénom.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" name="email" required />
+          <div class="invalid-feedback">
+            Veuillez saisir une adresse email valide.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adress" class="form-label">Adresse complète:</label>
+          <input type="text" class="form-control" name="adress" required />
+          <div class="invalid-feedback">
+            Veuillez saisir votre adresse complète.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <label for="sexe" class="form-label">Sexe:</label>
+              <select
+                name="sexe"
+                id="sexe"
+                class="form-control form-select"
+                required
+              >
+                <option value="">Sélectionner</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+              </select>
+              <div class="invalid-feedback">
+                Veuillez sélectionner votre sexe.
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="date" class="form-label">Date de naissance:</label>
+              <input
+                type="date"
+                class="form-control form-control-user"
+                id="date"
+                name="datenaiss"
+                placeholder="Date de naissance"
+                required
+              />
+              <div class="invalid-feedback">
+                Veuillez saisir votre date de naissance.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="mt-4" />
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <label for="domaine" class="form-label">Domaine de stage:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="domaine"
+                name="domain"
+                required
+              />
+              <div class="invalid-feedback">
+                Veuillez saisir votre domaine de stage.
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="tel" class="form-label">Numéro de téléphone:</label>
+              <input
+                type="tel"
+                id="tel"
+                class="form-control"
+                name="tel"
+                maxlength="10"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                required
+              />
+              <div class="invalid-feedback">
+                Veuillez saisir un numéro de téléphone valide.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="demandeDeStage" class="form-label"
+            >Demande de Stage:</label
+          >
+          <input
+            class="form-control"
+            type="file"
+            id="demandeDeStage"
+            name="demandeDeStage"
+            accept=".pdf"
+            required
+          />
+          <div class="invalid-feedback">
+            Veuillez sélectionner un fichier PDF.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cv" class="form-label">CV:</label>
+          <input
+            class="form-control"
+            type="file"
+            id="cv"
+            name="cv"
+            accept=".pdf"
+            required
+          />
+          <div class="invalid-feedback">
+            Veuillez sélectionner un fichier PDF.
+          </div>
+        </div>
+
+        <small class="form-text text-muted"
+          >Taille maximale du fichier : 5 Mo. Seuls les fichiers PDF sont
+          autorisés.</small
+        >
+
+        <div class="form-group d-flex justify-content-end mt-3">
+          <button type="submit" class="btn btn-primary">
+            Envoyer la demande
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  // Bootstrap validation script
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>

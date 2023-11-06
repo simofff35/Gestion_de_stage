@@ -1,0 +1,131 @@
+<div class="card shadow my-4" id="contentToChange">
+  <div class="card-body border-left-success">
+    <div class="container">
+      <form
+        action="/admin/add"
+        method="post"
+        class="needs-validation"
+        novalidate
+        enctype="multipart/form-data"
+      >
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nom" class="form-label">Nom:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nom"
+              name="nom"
+              required
+            />
+            <div class="invalid-feedback">Veuillez saisir votre nom.</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="prenom" class="form-label">Prénom:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="prenom"
+              name="prenom"
+              required
+            />
+            <div class="invalid-feedback">Veuillez saisir votre prénom.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+          />
+          <div class="invalid-feedback">
+            Veuillez saisir une adresse e-mail valide.
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="password" class="form-label">Mot de passe:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="confirmPassword" class="form-label"
+              >Confirmer le mot de passe:</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              minlength="6"
+            />
+            <div class="invalid-feedback">
+              Les mots de passe ne correspondent pas.
+            </div>
+          </div>
+        </div>
+
+        <% if (msg) {%>
+        <div class="alert alert-success">
+          <div class="ml-3"><%=msg%></div>
+        </div>
+        <%} %> <% if (pop) {%>
+        <div class="alert alert-danger">
+          <div class="ml-3">L'utilisateur existe déjà</div>
+        </div>
+        <%} %>
+
+        <div class="text-end mt-3">
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Bootstrap validation script
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            // Check if the passwords match
+            var password = form.querySelector("#password").value;
+            var confirmPassword = form.querySelector("#confirmPassword").value;
+            if (password !== confirmPassword) {
+              event.preventDefault();
+              event.stopPropagation();
+              alert("Les mots de passe ne correspondent pas.");
+            }
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
